@@ -25,7 +25,7 @@ urlpatterns = [
 
     path('admin/', admin.site.urls),
     path(r'comments/', include(("comments.urls", 'comments'), namespace='comments')),
-
+    path(r'api/comments/', include(("comments.comments_api.urls", 'comments.comments_api'), namespace='comments_api')),
     path(r'register/', register_view, name='register'),
     path(r'login/', login_view, name='login'),
     path(r'logout/', logout_view, name='logout'),

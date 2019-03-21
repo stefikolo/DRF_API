@@ -10,5 +10,5 @@ urlpatterns = [
     path('<str:slug>/', v.PostDetailBySlugApiView.as_view(), name='slug_detail'),
     # path('<str:slug>/', post_detail, name='detail'),
     path('<str:slug>/edit/', v.PostUpdateApiView.as_view(), name='update'),
-    path('<str:slug>/delete/', v.PostDeleteApiView.as_view(), name='delete'),
+    path('<int:pk>/delete/', v.PostDeleteApiView.as_view(), name='delete'),
 ]

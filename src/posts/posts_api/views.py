@@ -8,6 +8,7 @@ from posts.posts_api.serializers import PostSerializer, PostCreateSerializer, Po
 from posts.posts_api.permissions import IsOwnerOrReadOnly
 from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.pagination import LimitOffsetPagination, PageNumberPagination
+from posts.posts_api.pagination import PostLimitOffsetPagination, PostPageNumberPagination
 
 
 class PostListApiView(ListAPIView):
@@ -16,7 +17,7 @@ class PostListApiView(ListAPIView):
     permission_classes = [AllowAny]
     filter_backends = [SearchFilter]
     search_fields = ['title', 'content', 'user__first_name', 'user__last_name']
-    pagination_class = PageNumberPagination
+    pagination_class = PostPageNumberPagination
 
     def get_queryset(self, *args, **kwargs):
         query = self.request.GET.get("q")
@@ -59,8 +60,8 @@ class PostDeleteApiView(DestroyAPIView):
 
 class PostDetailApiView(RetrieveAPIView):
     queryset = Post.objects.all()
-    serializer_class = PostSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    serializer_class = PostListSerializer
+    # permission_classes = [IsAuthenticatedOrReadOnly]
 
 
 class PostDetailBySlugApiView(RetrieveAPIView):
